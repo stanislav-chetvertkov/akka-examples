@@ -8,8 +8,6 @@ import typed._1_example.TaskSupervisorActor.Task
 
 class TaskRunnerActor(id: String, task: Task, replyTo: ActorRef) extends Actor {
 
-
-  @scala.throws[Exception](classOf[Exception])
   override def preStart(): Unit = {
     replyTo ! TaskCompleted(id, task.payload.toUpperCase)
   }
@@ -27,5 +25,5 @@ object TaskRunnerActor {
 
   case class TaskAborted()
 
-  def props(id: String, task: Task, replyTo: ActorRef) = Props(classOf[TaskRunnerActor], id, task)
+  def props(id: String, task: Task, replyTo: ActorRef) = Props(classOf[TaskRunnerActor], id, task, replyTo)
 }

@@ -16,9 +16,7 @@ class TaskSupervisorActor extends Actor{
       val replyTo = sender()
       val runner = context.actorOf(TaskRunnerActor.props(id, task, replyTo))
       runners += id -> runner
-
-      replyTo ! SubmitTaskResponse(runner)
-
+      replyTo ! TaskSubmitted(id)
 
     case GetTaskStatus(id) =>
       val replyTo = sender()
@@ -39,7 +37,7 @@ object TaskSupervisorActor {
 
   case class SubmitTask(task: Task)
 
-  case class SubmitTaskResponse(handler: ActorRef)
+  case class TaskSubmitted(id: String)
 
   case class CancelTask(id: String)
 

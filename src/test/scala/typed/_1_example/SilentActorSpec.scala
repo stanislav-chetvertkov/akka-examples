@@ -16,16 +16,10 @@ class SilentActor01Test extends TestKit(ActorSystem("testsystem"))
       val supervisorRef = system.actorOf(TaskSupervisorActor.props())
 
 
+
+
       supervisorRef
     }
 
-  }
-
-  "change internal state when it receives a message, single" in {
-
-
-    val silentActor = TestActorRef[SilentActor]
-//    silentActor ! SilentMessage("whisper")
-//    silentActor.underlyingActor.state must (contain("whisper"))
   }
 }
