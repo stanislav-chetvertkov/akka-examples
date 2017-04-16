@@ -3,16 +3,15 @@ package http
 import akka.actor.ActorSystem
 import akka.http.scaladsl.Http
 import akka.http.scaladsl.Http.ServerBinding
-import akka.typed.ActorRef
+import akka.http.scaladsl.server.Directives._
 import akka.http.scaladsl.server.Route
 import akka.stream.ActorMaterializer
-import scala.concurrent.duration._
 
+import scala.concurrent.duration._
 import scala.concurrent.{Await, ExecutionContext}
 
 object Demo extends App{
 
-  import akka.http.scaladsl.server.Directives._
 
   def apiRoute(): Route = {
 
