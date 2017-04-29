@@ -31,4 +31,8 @@ libraryDependencies ++= Seq(
   "com.typesafe.akka" %% "akka-testkit" % akkaVersion % Test,
   "com.typesafe.akka" %% "akka-http-testkit" % akkaHttpVersion % Test
 )
+
+parallelExecution in Test := false
+
+fork := true
     

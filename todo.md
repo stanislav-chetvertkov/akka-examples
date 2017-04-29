@@ -1,0 +1,3 @@
+- curcuit breaker
+- akka persistence 
+     - todo: testing

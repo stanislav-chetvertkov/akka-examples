@@ -45,3 +45,6 @@ future {
   ans
 } pipeTo reply
 ```
+
+
+show that actors block on the future

@@ -6,14 +6,20 @@ import akka.routing.RoundRobinPool
 import com.typesafe.config.ConfigFactory
 import routing.remote.Remote.Processor
 
-object RemoteDemo extends App{
+object RemoteDemo extends App {
 
   val config = ConfigFactory.parseString(
     """
       |akka {
+      |  actor {
+      |    provider = remote
+      |  }
       |  remote {
       |    enabled-transports = ["akka.remote.netty.tcp"]
-      |    netty.port = 2551
+      |    netty.tcp {
+      |      hostname = "127.0.0.1"
+      |      port = 2551
+      |    }
       |  }
       |}
     """.stripMargin)
@@ -33,19 +39,29 @@ object RemoteDemo extends App{
 
 }
 
+// Processes the messages
 object RemoteSystem extends App {
 
   val config = ConfigFactory.parseString(
     """
       |akka {
+      |  actor {
+      |    provider = remote
+      |  }
       |  remote {
       |    enabled-transports = ["akka.remote.netty.tcp"]
-      |    netty.port = 2552
+      |    netty.tcp {
+      |      hostname = "127.0.0.1"
+      |      port = 2552
+      |    }
       |  }
       |}
     """.stripMargin)
 
   val remoteSystem = ActorSystem("RemoteTestSystem", config)
 
-  remoteSystem
 }
+
+// Akka has two ways of using remoting:
+// Lookup : used to look up an actor on a remote node with actorSelection(path)
+// Creation : used to create an actor on a remote node with actorOf(Props(...), actorName)
